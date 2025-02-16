@@ -32,12 +32,12 @@ The API runs on **port 3000** by default.
 
 ## Docker Setup
 
-### 1️⃣ **Build & Run with Docker**
+###  **Build & Run with Docker**
 ```sh
 docker-compose up --build
 ```
 
-### 2️⃣ **Stop Containers**
+###  **Stop Containers**
 ```sh
 docker-compose down
 ```
@@ -63,7 +63,7 @@ Response:
 }
 ```
 
-### ✅ **Batch IP Lookup**
+###  **Batch IP Lookup**
 ```sh
 POST /lookup
 ```
@@ -74,13 +74,13 @@ curl -X POST http://localhost:3000/lookup \
   -d '{"ips": ["184.51.33.230", "23.79.237.5"]}'
 ```
 
-## 🤖 Error Handling
+##  Error Handling
 - **Invalid IP Address** → Returns `400 Bad Request`
 - **Missing Parameters** → Returns `400 Bad Request`
 - **Server Errors** → Returns `500 Internal Server Error`
 
 
-## 🚀 Deployment
+##  Deployment
 - Push Docker image to a registry:
 ```sh
 docker tag ip-lookup-service your-dockerhub-username/ip-lookup-service
