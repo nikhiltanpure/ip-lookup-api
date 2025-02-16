@@ -37,6 +37,11 @@ The API runs on **port 3000** by default.
 
 ---
 
+## Swagger Url
+```sh
+http://localhost:3000/api-docs/
+```
+
 ## Docker Setup
 
 ###  **Build & Run with Docker**
