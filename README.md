@@ -3,7 +3,7 @@
 This project provides a **RESTful API** to check if a given IP address belongs to a known cloud provider's subnet. It uses **Node.js** for backend processing and supports **batch IP lookups** with efficient data storage and retrieval.
 
 ## Features
-- Fast IP subnet lookup from `prefixes.json`
+- Api lookup from `prefixes.json`
 - Supports **single** and **batch IP lookup**
 - Dockerized setup for easy deployment
 - RESTful API following best practices
@@ -12,7 +12,7 @@ This project provides a **RESTful API** to check if a given IP address belongs t
 
 ### Clone the Repository
 ```sh
-git clone https://github.com/your-repo/ip-prefix-lookup.git
+git clone https://github.com/nikhiltanpure/ip-lookup-api.git
 cd ip-prefix-lookup
 ```
 
@@ -20,6 +20,13 @@ cd ip-prefix-lookup
 ```sh
 npm install
 ```
+
+### Start the API
+```sh
+Create .env file at root level with below content
+PORT=3000
+```
+
 
 ### Start the API
 ```sh
