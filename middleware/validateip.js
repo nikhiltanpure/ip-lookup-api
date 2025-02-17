@@ -19,15 +19,19 @@ const validateIPGroup = (req, res, next) => {
   const { ips } = req.body;
 
   if (Array.isArray(ips)) {
-    if (ips.length > MAX_IP_SEARCH_LENGHT) {
-      return res
-        .status(400)
-        .json({ error: "Maximum limit is 10 IP addresses per request." });
+    if (
+      ips.length > (process.env.MAX_IP_SEARCH_LENGHT || MAX_IP_SEARCH_LENGHT)
+    ) {
+      return res.status(400).json({
+        error: `Maximum limit is ${
+          process.env.MAX_IP_SEARCH_LENGHT || MAX_IP_SEARCH_LENGHT
+        } IP addresses per request.`,
+      });
     }
 
     for (const ip of ips) {
       if (!ipAddress.Address4.isValid(ip)) {
-        return res.status(400).json({ error: `Invalid IP address: ${ipAddr}` });
+        return res.status(400).json({ error: `Invalid IP address: ${ip}` });
       }
     }
   } else {

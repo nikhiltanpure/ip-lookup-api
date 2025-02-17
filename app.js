@@ -6,7 +6,8 @@ const setupSwagger = require("./swagger");
 
 const {
   MAX_REQUEST_ALLOWED,
-  ONE_MIN_TIME_IN_MILLISECONDS,
+  TIME_IN_SECONDS,
+  TIME_MILISECONDS,
 } = require("./constants");
 
 const app = express();
@@ -16,8 +17,10 @@ app.use(express.json());
 setupSwagger(app);
 
 const limiter = rateLimit({
-  windowMs: ONE_MIN_TIME_IN_MILLISECONDS, // 1 minute
-  max: MAX_REQUEST_ALLOWED, // Limit each IP to 5 requests per minute
+  windowMs:
+    parseInt(process.env.TIME_WINDOW_IN_SECONDS) * TIME_MILISECONDS ||
+    TIME_IN_SECONDS * TIME_MILISECONDS,
+  max: parseInt(process.env.MAX_REQUEST_ALLOWED) || MAX_REQUEST_ALLOWED, // Limit each IP to 5 requests per minute
   message: { error: "Too many requests, please try again later." },
 });
 
