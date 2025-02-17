@@ -74,10 +74,13 @@ cd ip-prefix-lookup
 npm install
 ```
 
-### Start the API
+### Environment Setup
 ```sh
 Create .env file at root level with below content
 PORT=3000
+MAX_REQUEST_ALLOWED = 5
+TIME_WINDOW_IN_SECONDS = 60
+MAX_IP_SEARCH_LENGHT = 10
 ```
 
 
