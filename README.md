@@ -29,34 +29,30 @@ Follow the RESTful design standards and coding standards. The code should be up 
 
 ## Proposed Solution
 ### Algorithm Used
-
-Trie (Prefix Tree) Data Structure
-
-The solution utilizes a Trie (Prefix Tree) to store and search IP prefixes efficiently. The key benefits of using a Trie are:
-
-Efficient Storage: Overlapping subnets share common prefixes, reducing memory usage.
-
-Fast Lookup: IP addresses are parsed and checked against the Trie in O(log N) time.
-
-Optimized for CIDR Matching: The hierarchical nature of subnets aligns well with Trie traversal.
+- Trie (Prefix Tree) Data Structure
+- The solution utilizes a Trie (Prefix Tree) to store and search IP prefixes efficiently. The key benefits of using a Trie are:
+- Efficient Storage: Overlapping subnets share common prefixes, reducing memory usage.
+- Fast Lookup: IP addresses are parsed and checked against the Trie in O(log N) time.
+- Optimized for CIDR Matching: The hierarchical nature of subnets aligns well with Trie traversal.
 
 ### Algorithm Description
-
 Data Preparation: Load the prefixes.json file and insert each subnet into a Trie structure.
 
 ### Insert Operation:
-
-Convert the CIDR notation to a binary representation.
-
-Store each bit of the IP prefix in the Trie, ensuring minimal redundancy.
+- Convert the CIDR notation to a binary representation.
+- Store each bit of the IP prefix in the Trie, ensuring minimal redundancy.
 
 ### Search Operation:
+- Convert the given IP address into binary format.
+- Traverse the Trie from the root node, following matching bits.
+- Return all matching subnets, providers, and tags found along the path
 
-Convert the given IP address into binary format.
-
-Traverse the Trie from the root node, following matching bits.
-
-Return all matching subnets, providers, and tags found along the path
+## Limitations
+- IPv6 not implemented
+- All test cases are not covered
+- Scope to optimize speed and memory
+- In-memory cache implemented for API rate limiting
+- API authentication not implemented
 
 ## Features
 - Api lookup from `prefixes.json`
