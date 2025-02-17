@@ -59,6 +59,7 @@ Data Preparation: Load the prefixes.json file and insert each subnet into a Trie
 - Supports **single** and **batch IP lookup**
 - Dockerized setup for easy deployment
 - RESTful API following best practices
+- In Memory rate limiter implemented
 
 ## Installation & Setup
 
