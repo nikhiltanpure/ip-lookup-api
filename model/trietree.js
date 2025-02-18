@@ -14,11 +14,17 @@ class IPTrie {
 
   insert(subnet, provider, tags) {
     try {
-      const network = new ip.Address4(subnet.split("/")[0]);
-      const prefix = parseInt(subnet.split("/")[1]);
-      let node = this.root;
+      let ipObj, prefix;
+      if (subnet.includes(":")) {
+        ipObj = new ip.Address6(subnet.split("/")[0]);
+        prefix = parseInt(subnet.split("/")[1]);
+      } else {
+        ipObj = new ip.Address4(subnet.split("/")[0]);
+        prefix = parseInt(subnet.split("/")[1]);
+      }
 
-      for (const bit of this.ipToBits(network, prefix)) {
+      let node = this.root;
+      for (const bit of this.ipToBits(ipObj, prefix)) {
         if (!node.children[bit]) {
           node.children[bit] = new TrieNode();
         }
@@ -32,10 +38,15 @@ class IPTrie {
 
   search(ipAddress) {
     try {
-      const ipObj = new ip.Address4(ipAddress);
+      let ipObj;
+      if (ipAddress.includes(":")) {
+        ipObj = new ip.Address6(ipAddress);
+      } else {
+        ipObj = new ip.Address4(ipAddress);
+      }
+
       let node = this.root;
       let results = [];
-
       for (const bit of this.ipToBits(ipObj)) {
         if (node.children[bit]) {
           node = node.children[bit];
@@ -53,12 +64,17 @@ class IPTrie {
     }
   }
 
-  ipToBits(ipObj, prefixLen = 32) {
-    return ipObj
-      .toArray()
-      .flatMap((byte) => byte.toString(2).padStart(8, "0"))
-      .join("")
-      .slice(0, prefixLen);
+  ipToBits(ipObj, prefixLen) {
+    if (ipObj instanceof ip.Address6) {
+      return ipObj.bigInt().toString(2).padStart(128, "0").slice(0, prefixLen);
+    } else if (ipObj instanceof ip.Address4) {
+      return ipObj.parsedAddress
+        .flatMap((byte) => parseInt(byte, 10).toString(2).padStart(8, "0"))
+        .join("")
+        .slice(0, prefixLen);
+    } else {
+      throw new Error("Invalid IP object");
+    }
   }
 }
 
