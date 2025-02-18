@@ -48,7 +48,6 @@ Data Preparation: Load the prefixes.json file and insert each subnet into a Trie
 - Return all matching subnets, providers, and tags found along the path
 
 ## Limitations
-- IPv6 not implemented
 - All test cases are not covered
 - Scope to optimize speed and memory
 - In-memory cache implemented for API rate limiting
